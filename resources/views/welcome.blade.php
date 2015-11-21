@@ -40,7 +40,6 @@
             <div class="content">
                 <div class="title">SurveyGen</div>
                 <div class="content">Your friendly survey generator.</div>
-                {{ dd(\Auth::user()) }}
             </div>
         </div>
     </body>

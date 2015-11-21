@@ -39,6 +39,11 @@ class User extends Model implements AuthenticatableContract,
 
     public function surveys()
     {
-        return $this->hasMany('App\Models\Survey');
+        return $this->hasMany('App\Models\Survey'); 
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany('App\Models\Role');
     }
 }

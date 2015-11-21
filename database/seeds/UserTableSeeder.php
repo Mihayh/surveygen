@@ -11,10 +11,12 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        App\User::create([
+        $user = App\User::create([
         	'name' => 'Admin',
         	'email' => 'admin@surveygen.com',
         	'password' => bcrypt('adminpass'),
         ]);
+
+        $user->roles()->sync([1]);
     }
 }
