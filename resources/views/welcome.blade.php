@@ -3,7 +3,7 @@
     <head>
         <title>Laravel</title>
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Lato:100,500" rel="stylesheet" type="text/css">
 
         <style>
             html, body {
@@ -38,7 +38,9 @@
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">Laravel 5</div>
+                <div class="title">SurveyGen</div>
+                <div class="content">Your friendly survey generator.</div>
+                {{ dd(\Auth::user()) }}
             </div>
         </div>
     </body>
