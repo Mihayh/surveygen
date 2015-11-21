@@ -12,7 +12,15 @@ class CreateSurveysTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('surveys', function(Blueprint $table){
+            $table->increments('id');
+            $table->string('name', 100);
+            $table->string('description', 1000);
+            $table->integer('category_id')->nullable();
+            $table->integer('user_id');
+            $table->timestamps();
+            $table->softDeletes();
+        });
     }
 
     /**
@@ -22,6 +30,6 @@ class CreateSurveysTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('surveys');
     }
 }

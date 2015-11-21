@@ -12,7 +12,15 @@ class CreateQuestionsTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('questions', function(Blueprint $table){
+            $table->increments('id');
+            $table->string('question');
+            $table->string('type');
+            $table->integer('order');
+            $table->integer('survey_id');
+            $table->timestamps();
+            $table->softDeletes();
+        }); 
     }
 
     /**
@@ -22,6 +30,6 @@ class CreateQuestionsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('questions');
     }
 }

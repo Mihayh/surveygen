@@ -12,7 +12,13 @@ class CreateChoicesTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('choices', function(Blueprint $table){
+            $table->increments('id');
+            $table->string('choice');
+            $table->integer('question_id');
+            $table->timestamps();
+            $table->softDeletes();
+        });
     }
 
     /**
@@ -22,6 +28,6 @@ class CreateChoicesTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('choices');
     }
 }

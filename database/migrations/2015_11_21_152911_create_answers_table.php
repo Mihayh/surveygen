@@ -12,7 +12,13 @@ class CreateAnswersTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('answers', function(Blueprint $table){
+            $table->increments('id');
+            $table->string('answer');
+            $table->integer('question_id');
+            $table->timestamps();
+            $table->softDeletes();
+        }); 
     }
 
     /**
@@ -22,6 +28,6 @@ class CreateAnswersTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('answers');
     }
 }
