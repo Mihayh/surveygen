@@ -124,8 +124,30 @@ class ApiController extends Controller {
 	 *
 	 * @return 	string
 	 */
-	public function respondCreated($message = 'Successfully created!') {
-		return $this->setStatusCode(201)->respond(['error' => $message]);
+	public function respondCreated($data = null) {
+		return $this->setStatusCode(201)->respond($data);
+    }
+
+    /**
+	 * Create update API response
+	 *
+	 * @param 	string 			$data 		the created object
+	 *
+	 * @return 	string
+	 */
+    public function respondUpdated($data = null) {
+		return $this->setStatusCode(200)->respond($data);
+    }
+
+    /**
+	 * Create delete API response
+	 *
+	 * @param 	string 			$data 		
+	 *
+	 * @return 	
+	 */
+    public function respondDeleted() {
+		return $this->setStatusCode(204)->respond();
     }
 
 	/**

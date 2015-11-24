@@ -54,9 +54,9 @@ class SurveysController extends ApiController
      */
     public function store(SurveyRequest $request)
     {
-        $survey = App\Models\Survey::create($request->all());
+        $survey = \App\Models\Survey::create($request->all());
 
-        return \Response::json($survey);
+        return $this->respondCreated($this->surveyTransformer->transform($survey));
     }
 
     /**
@@ -67,7 +67,9 @@ class SurveysController extends ApiController
      */
     public function show($category_id, $survey_id)
     {
-        
+        $survey = \App\Models\Survey::find($survey_id);
+
+        return $this->respond($this->surveyTransformer->transform($survey));
     }
 
     /**
@@ -90,11 +92,11 @@ class SurveysController extends ApiController
      */
     public function update(SurveyRequest $request, $category_id, $survey_id)
     {
-        $survey = App\Models\Survey::find($survey_id);
+        $survey = \App\Models\Survey::find($survey_id);
 
         $survey->update($request->all());
 
-        return \Response::json($survey);
+        return $this->respondUpdated($this->surveyTransformer->transform($survey));
     }
 
     /**
@@ -103,8 +105,11 @@ class SurveysController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($category_id, $id)
     {
-        //
+        $survey = \App\Models\Survey::find($id);
+        $survey->delete();
+
+        return $this->respondDeleted();
     }
 }

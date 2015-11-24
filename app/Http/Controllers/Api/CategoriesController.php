@@ -56,7 +56,7 @@ class CategoriesController extends ApiController
     public function store(CategoryRequest $request)
     {
         $category = \App\Models\Category::create($request->all());
-        return \Response::json($category);
+        return $this->respondCreated($category);
     }
 
     /**
@@ -69,7 +69,7 @@ class CategoriesController extends ApiController
     {
         $category = \App\Models\Category::find($id);
 
-        return Response::json($category);
+        return $this->respond($this->categoryTransformer->transform($category));
     }
 
     /**
@@ -92,10 +92,10 @@ class CategoriesController extends ApiController
      */
     public function update(CategoryRequest $request, $id)
     {
-        $category = App\Models\Category::find($id);
+        $category = \App\Models\Category::find($id);
         $category->update($request->all());
 
-        return \Response::json($category);
+        return $this->respondUpdated($category);
     }
 
     /**
@@ -106,6 +106,8 @@ class CategoriesController extends ApiController
      */
     public function destroy($id)
     {
-        //
+        $category = \App\Models\Category::find($id);
+        $category->delete();
+        return $this->respondDeleted();
     }
 }

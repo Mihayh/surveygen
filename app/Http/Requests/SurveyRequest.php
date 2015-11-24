@@ -25,7 +25,7 @@ class SurveyRequest extends Request
     {
         return [
             'name' => 'required|min:2',
-            'category_id' => 'required|exists:categories, id',
+            'category_id' => 'required|exists:categories,id',
             'user_id' => 'required|exists:users,id',
         ];
     }
