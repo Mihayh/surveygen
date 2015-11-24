@@ -6,10 +6,24 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Requests\SurveyRequest as SurveyRequest;
-use App\Http\Controllers\Controller;
+use App\Transformers\SurveyTransformer as SurveyTransformer;
+use App\Http\Controllers\Api\ApiController;
 
-class SurveysController extends Controller
+class SurveysController extends ApiController
 {
+
+    protected $survey;
+
+    protected $SurveyTransformer;
+
+
+    public function __construct(\App\Models\Survey $survey, SurveyTransformer $surveyTransformer)
+    {
+        $this->survey = $survey;
+        $this->surveyTransformer = $surveyTransformer;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -17,9 +31,9 @@ class SurveysController extends Controller
      */
     public function index($category_id)
     {
-        $surveys = App\Models\Category::find($category_id)->surveys;
+        $surveys = \App\Models\Category::find($category_id)->surveys;
 
-        return \Response::json($surveys);
+        return $this->respond($this->surveyTransformer->transformCollection($surveys->all()));
     }
 
     /**

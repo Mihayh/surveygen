@@ -6,11 +6,25 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Requests\CategoryRequest as CategoryRequest;
-use App\Http\Transformers\CategoryTransformer;
-use App\Http\Controllers\Controller;
+use App\Transformers\CategoryTransformer as CategoryTransformer;
+use App\Http\Controllers\Api\ApiController;
 
-class CategoriesController extends Controller
+class CategoriesController extends ApiController
 {
+
+
+    protected $category;
+
+    protected $categoryTransformer;
+
+
+    public function __construct(\App\Models\Category $category, CategoryTransformer $categoryTransformer)
+    {
+        
+        $this->category = $category;
+        $this->categoryTransformer = $categoryTransformer;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -18,9 +32,9 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $categories = \App\Models\Category::all();
+        $categories = \App\Models\Category::get();
 
-        return \Response::json($categories);
+        return $this->respond($this->categoryTransformer->transformCollection($categories->all()));
     }
 
     /**

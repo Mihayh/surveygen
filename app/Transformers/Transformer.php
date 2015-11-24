@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\Transformer;
+namespace App\Transformers;
 
 
 abstract class Transformer {
@@ -10,5 +10,5 @@ abstract class Transformer {
 		return array_map([$this, 'transform'], $items);	
 	}
 
-	public function transform($item);
+	abstract function transform($item);
 }

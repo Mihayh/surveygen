@@ -2,11 +2,11 @@
 
 namespace App\Transformers;
 
-class CategoryTransformers extends Transformer {
+class CategoryTransformer extends Transformer {
 
 	public function transform($category)
 	{
-		
+		return $category;
 	}
 
 }
