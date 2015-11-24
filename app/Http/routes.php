@@ -21,6 +21,6 @@ Route::post('/auth/login', ['as' => 'login.post', 'uses' => 'Auth\AuthController
 Route::get('/auth/logout', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']);
 
 Route::group(['middleware' => 'jwt.auth'], function(){
-	Route::resource('categories', 'CategoriesController');
-	Route::resource('categories.surveys', 'SurveysController');
+	Route::resource('categories', 'Api\CategoriesController');
+	Route::resource('categories.surveys', 'Api\SurveysController');
 });
