@@ -23,4 +23,5 @@ Route::get('/auth/logout', ['as' => 'logout', 'uses' => 'Auth\AuthController@get
 Route::group(['middleware' => 'jwt.auth'], function(){
 	Route::resource('categories', 'Api\CategoriesController');
 	Route::resource('categories.surveys', 'Api\SurveysController');
+	Route::resource('surveys.questions', 'Api\QuestionsController');
 });
